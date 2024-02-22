@@ -1,0 +1,177 @@
+body {
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color:darkslategray;
+    color: aliceblue;
+}
+
+p {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    margin-top: 10rem;
+    /*padding:  0.5rem 3rem 3rem 3rem;*/
+    border-radius: 5rem;
+
+    background-color: rgba(182, 182, 90, 0.372);
+    box-shadow: 0 0 2px rgba(182, 182, 90, 0.37);
+
+}
+
+.navbar {
+    padding: 0.5rem;
+
+    box-shadow: 0 3px 5px rgba(45, 45, 22, 0.37);
+
+    background-color: rgba(75, 75, 36, 0.37);
+}
+
+.nav_buttons {
+    margin: 0.5rem 2rem 0 2.5rem;
+}
+
+.stats_btn {
+
+    display: flex;
+    align-self: flex-start;
+    width: max-content;
+
+    color: #ccc;
+
+    text-decoration: none;
+    font-size: 1.75rem;
+
+    margin: 0.25rem;
+}
+
+.content {
+    padding: 1rem 3rem 3rem 3rem;
+}
+
+.exercises {
+    display: flex;
+    flex-direction: row;
+
+    font-size: x-large;
+}
+
+.exercise {
+    display: flex;
+    flex-direction: column;
+
+    width: 200px;
+    margin: 0 0.5rem;
+
+
+    /*justify-content: space-between;*/
+}
+
+h4 {
+    display: flex;
+    align-self: baseline;
+    margin: 0 1.5rem 0.25rem 1.5rem;
+
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+}
+
+.text_header {
+    text-align: center;
+
+    margin: 0.25rem;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+}
+
+.total {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.total_num {
+    display: flex;
+    align-self: center;
+}
+
+.exercise_type {
+    margin-right: 1rem;
+    align-self: center;
+}
+
+/* pushups,situps,squads forms */
+/* .exercise_form {
+    display: flex;
+    align-items: center;
+} */
+
+.reps {
+    border: none;
+
+    border-radius: 1rem;
+    height: 2.5rem;
+    width: 3.5rem;
+
+    margin-right: 0.5rem;
+
+    font-size: 22px;
+    text-align: center;
+
+    outline: none;
+}
+
+input[type="number"]:focus {
+    border-color: #007bff; /* Зміна кольору рамки при фокусі */
+    box-shadow: 0 0 5px #007bff; /* Тінь при фокусі */
+}
+
+/* Стилізація спін-батонів для WebKit браузерів (Chrome, Safari) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Вимкнення стандартного вигляду */
+    margin: 0; /* Зняття зовнішніх відступів */
+    color: red;
+    background-color: #ccc;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+.add {
+    font-size: large;
+    font-weight: bold;
+
+    height: 2.5rem;
+    width: 5rem;
+    border-radius: 1rem;
+    background-color: rgba(182, 182, 90, 0.197);
+
+    border: 0.2rem solid black;
+
+    /* align-self: center; */
+}
+
+.add:active {
+    background-color: aqua;
+}
+
+.header_text {
+    margin: 0;
+}

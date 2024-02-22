@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'main/input.css' %}">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto">
+    </head>
+    <body>
+        <div class="container">
+            <div class="box">
+                <div class="navbar">
+                    <div class="nav_buttons">
+                        <a href="{% url 'stats' %}" class="stats_btn">Stats</a>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="header">
+                        <h1 class="header_text">Let's record what you're done!</h1>
+                    </div>
+                    <div class="exercises">
+                        <form id="form" action="/main/" method="post">
+                            {% csrf_token %}
+                            <p>Push-ups: {{ push_ups_today.today_total }}</p>
+                            {{ form.push_ups }}
+                            <p>Sit-ups: {{ sit_ups_today.today_total }}</p>
+                            {{ form.sit_ups }}
+                            <p>Squads: {{ squads_today.today_total }}</p>
+                            {{ form.squads }}
+                            <input type="submit" value="Add all" class="add">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+{#    <script>#}
+{#        document.getElementById("form").addEventListener('submit', function() {#}
+{#            let pushInputValue = document.getElementById("id_push_ups").value;#}
+{#            let sitInputValue = document.getElementById("id_sit_ups").value;#}
+{#            let squadInputValue = document.getElementById("id_squads").value;#}
+{#            let lst = [pushInputValue, sitInputValue, squadInputValue]#}
+{#            for (const exerciseValue of lst) {#}
+{#                if (!Number.isInteger(parseFloat(exerciseValue))) {#}
+{#                    alert("Please enter an integer.");#}
+{#                    break;#}
+{#                }#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+</html>

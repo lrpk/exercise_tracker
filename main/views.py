@@ -6,20 +6,21 @@ from django.http import HttpResponseRedirect
 from .models import DailyPushRecord, DailySitRecord, DailySquadRecord
 from .forms import ExerciseForm
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+import matplotlib as mpl
+
 
 # Create your views here.
 def index(request):
-    # try:
     push_ups_today = DailyPushRecord.objects.last()
     sit_ups_today = DailySitRecord.objects.last()
     squads_today = DailySquadRecord.objects.last()
-    # except:
-    #     push_ups_today = 0
-    #     sit_ups_today = 0
-    #     squads_today = 0
+
+    date = datetime.now().strftime("%a, %d %b %Y")
 
     def get_data(exercise_type, get_form, exercise_obj):
-        date = datetime.now().strftime("%a, %d %b %Y")
         if request.method == "POST":
             exercise_reps = get_form.cleaned_data[exercise_type]
             if exercise_obj is not None:
@@ -75,6 +76,7 @@ def index(request):
         "sit_ups_today": sit_ups_today,
         "squads_today": squads_today,
         "form": form,
+        "current_date": date,
     })
 
 
@@ -88,13 +90,16 @@ def stats(request):
     daily_sit_records = []
     daily_squad_records = []
 
+    plots_push_records = []
+
     current_date = datetime.now()
     # Get the last three days
     last_three_days = [(current_date - timedelta(days=i)).strftime("%a, %d %b %Y") for i in range(3)]
+    last_ten_days = [(current_date - timedelta(days=i)).strftime("%a, %d %b %Y") for i in range(10)]
 
     # Format and print the last three days
-    def last_data(filter_lst, exercise_obj):
-        for day in last_three_days:
+    def last_data(filter_lst, exercise_obj, num_of_days):
+        for day in num_of_days:
             last_record = exercise_obj.filter(current_time=day).last()
 
             if last_record is not None:
@@ -102,12 +107,28 @@ def stats(request):
             else:
                 continue
 
-    last_data(daily_push_records, push_ups_obj)
-    last_data(daily_sit_records, sit_ups_obj)
-    last_data(daily_squad_records, squads_obj)
+# ==================================================================================
+
+#  Фільтрую інформацію за останні десять днів та роблю з неї графік який має передатися
+#  на сторінку "stats.html"
+
+    # plot
+    days = []
+    reps = []
+
+    last_data(plots_push_records, push_ups_obj, last_ten_days)
+    fig, ax = plt.subplots()
+    push_ups_plot = ax.plot(days, reps)
+
+# ===================================================================================
+
+    last_data(daily_push_records, push_ups_obj, last_three_days)
+    last_data(daily_sit_records, sit_ups_obj, last_three_days)
+    last_data(daily_squad_records, squads_obj, last_three_days)
 
     return render(request, "main/stats.html", {
         "daily_push_records": daily_push_records,
         "daily_sit_records": daily_sit_records,
         "daily_squad_records": daily_squad_records,
+        "push_ups_plot": push_ups_plot,
     })

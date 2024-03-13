@@ -4,7 +4,8 @@ from .models import Records, DailyPushRecord, DailySitRecord, DailySquadRecord
 
 class RecordsAdmin(admin.ModelAdmin):
     # list_filter = ("type", "total",)
-    list_display = ("type", "total",)
+    # list_display = ("type", "total",)
+    pass
 
 
 # Register your models here.

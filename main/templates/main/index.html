@@ -25,11 +25,23 @@
                     <div class="exercises">
                         <form id="form" action="/main/" method="post">
                             {% csrf_token %}
-                            <p>Push-ups: {{ push_ups_today.today_total }}</p>
+                            {% if push_ups_today.current_time == current_date %}
+                                <p>Push-ups: {{ push_ups_today.today_total }}</p>
+                            {% else %}
+                                <p>Push-ups: 0</p>
+                            {% endif %}
                             {{ form.push_ups }}
-                            <p>Sit-ups: {{ sit_ups_today.today_total }}</p>
+                            {% if sit_ups_today.current_time == current_date %}
+                                <p>Sit-ups: {{ sit_ups_today.today_total }}</p>
+                            {% else %}
+                                <p>Sit-ups: 0</p>
+                            {% endif %}
                             {{ form.sit_ups }}
-                            <p>Squads: {{ squads_today.today_total }}</p>
+                            {% if squads_today.current_time == current_date %}
+                                <p>Squads: {{ squads_today.today_total }}</p>
+                            {% else %}
+                                <p>Squads: 0</p>
+                            {% endif %}
                             {{ form.squads }}
                             <input type="submit" value="Add all" class="add">
                         </form>
